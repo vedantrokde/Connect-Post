@@ -1,0 +1,72 @@
+<mat-card>
+  <mat-spinner [diameter]="30" *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" *ngIf="!isLoading" (submit)="onSavePost()">
+    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
+      <img [src]="imagePreview" [alt]="form.value.title" />
+    </div>
+    <div>
+      <div mat-dialog-content>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="title"
+            placeholder="Post Title"
+          />
+          <mat-error *ngIf="form.get('title').invalid"
+            >Enter valid title for the post...</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div mat-dialog-content>
+        <mat-form-field>
+          <textarea
+            matInput
+            rows="2"
+            formControlName="content"
+            placeholder="Post Content"
+          ></textarea>
+          <mat-error *ngIf="form.get('content').invalid"
+            >Enter valid content in the post...</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </div>
+    <div mat-dialog-content>
+      <button
+        type="button"
+        mat-stroked-button
+        color="accent"
+        (click)="file.click()"
+      >
+        Pick Image
+      </button>
+      <input
+        type="file"
+        (change)="onImagePicked($event)"
+        #file
+        style="display: none"
+      />
+
+      <div style="float: right">
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+          [disabled]="form.invalid"
+        >
+          Save Post
+        </button>
+        &nbsp;
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="dialog.close()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</mat-card>

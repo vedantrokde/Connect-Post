@@ -1,0 +1,99 @@
+<mat-card>
+  <mat-spinner [diameter]="30" *ngIf="isLoading"></mat-spinner>
+  <h1 mat-dialog-title>SignUp Form</h1>
+  <form #signupForm="ngForm" *ngIf="!isLoading" (submit)="onSignup(signupForm)">
+    <div>
+      <div mat-dialog-content>
+        <mat-form-field>
+          <input
+            matInput
+            type="test"
+            required
+            ngModel
+            minlength="3"
+            maxlength="20"
+            name="firstName"
+            placeholder="First Name"
+            #firstName="ngModel"
+          />
+          <mat-error *ngIf="firstName.invalid"
+            >Enter valid first name...</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div mat-dialog-content>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            required
+            ngModel
+            minlength="3"
+            maxlength="20"
+            name="lastName"
+            placeholder="Last Name"
+            #lastName="ngModel"
+          />
+          <mat-error *ngIf="lastName.invalid"
+            >Enter valid last name. Try again...</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div mat-dialog-content>
+        <mat-form-field>
+          <input
+            matInput
+            type="email"
+            required
+            ngModel
+            email
+            name="email"
+            placeholder="Email"
+            #email="ngModel"
+          />
+          <mat-error *ngIf="email.invalid"
+            >Enter valid email. Try again...</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div mat-dialog-content>
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            required
+            minlength="6"
+            ngModel
+            name="password"
+            placeholder="Password"
+            #password="ngModel"
+          />
+          <mat-error *ngIf="password.invalid"
+            >Enter valid password. Try again...</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </div>
+    <div mat-dialog-actions>
+      <div style="float: right">
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+          [disabled]="signupForm.invalid"
+        >
+          Register  
+        </button>
+        &nbsp;
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="dialog.close()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</mat-card>

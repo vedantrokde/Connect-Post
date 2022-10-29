@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+  <span>ConnectPost</span>
+
+  <ul class="nav nav-bar">
+    <ng-template [ngIf]="(authState | async).isAuthenticated">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon style="line-height: 22px;">account_circle</mat-icon> &nbsp;
+        {{ (authState | async).user.firstName }}
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onCreatePost()">Create Post</button>
+        <button mat-menu-item (click)="onLogout()">Logout</button>
+      </mat-menu>
+    </ng-template>
+
+    <ng-template [ngIf]="!(authState | async).isAuthenticated">
+      <li>
+        <a class="nav-link" mat-button (click)="onRegister()">Register</a>
+      </li>
+      <li>
+        <a class="nav-link" mat-button (click)="onLogin()">Login</a>
+      </li>
+    </ng-template>
+  </ul>
+</mat-toolbar>
